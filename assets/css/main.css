@@ -287,6 +287,7 @@ h2 {
 h3 {
 	font-size: 1.5em;
 	letter-spacing: -0.015em;
+	text-align: left;
 }
 
 em,
@@ -2109,6 +2110,7 @@ body>article {
 #top p {
 	font-size: 1.5em;
 	line-height: 1.75em;
+	text-align: left;
 }
 
 #top p a {
@@ -2394,6 +2396,7 @@ body>article {
 
 	#top p {
 		font-size: 1em;
+		text-align: left;
 	}
 
 	#socials footer {
