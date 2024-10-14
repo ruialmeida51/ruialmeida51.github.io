@@ -287,7 +287,6 @@ h2 {
 h3 {
 	font-size: 1.5em;
 	letter-spacing: -0.015em;
-	text-align: left;
 }
 
 em,
@@ -2246,6 +2245,9 @@ body>article {
 		margin: 0 auto 2em auto;
 	}
 
+	#top h3 {
+		text-align: left;
+	}
 }
 
 /* Small */
@@ -2313,7 +2315,7 @@ body>article {
 	button,
 	.button {
 		text-align: center;
-		font-size: 0.8em;
+		font-size: 1.25em;
 		width: 100%;
 		padding: 1em 0 1em 0;
 	}
@@ -2417,7 +2419,11 @@ body>article {
 	}
 
 	#top p {
-		font-size: 1em;
+		font-size: 1.25em;
+		text-align: left;
+	}
+
+	#top h3 {
 		text-align: left;
 	}
 
