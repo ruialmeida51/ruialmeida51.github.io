@@ -337,8 +337,7 @@ footer>p {
 
 .container {
 	margin: 0 auto;
-	max-width: calc(100% - 50px);
-	width: 1200px;
+	width: 1300px;
 }
 
 .container.medium {
@@ -349,6 +348,7 @@ footer>p {
 
 	.container {
 		width: 1200px;
+		max-width: calc(100% - 40px);
 	}
 
 	.container.medium {
@@ -361,6 +361,7 @@ footer>p {
 
 	.container {
 		width: 960px;
+		max-width: calc(100% - 40px);
 	}
 
 	.container.medium {
@@ -373,6 +374,7 @@ footer>p {
 
 	.container {
 		width: 100%;
+		max-width: calc(100% - 40px);
 	}
 
 	.container.medium {
@@ -385,7 +387,7 @@ footer>p {
 
 	.container {
 		width: 100%;
-		max-width: calc(100% - 30px);
+		max-width: calc(100% - 40px);
 	}
 
 	.container.medium {
@@ -637,7 +639,15 @@ footer>p {
 	padding-top: 50px;
 }
 
+.col-4.col-5-large.col-12-medium {
+	padding-right: 50px;
+}
+
 @media screen and (max-width: 1680px) {
+
+	.col-4.col-5-large.col-12-medium {
+		padding-right: 50px;
+	}
 
 	.row {
 		display: flex;
@@ -884,6 +894,10 @@ footer>p {
 
 @media screen and (max-width: 1280px) {
 
+	.col-4.col-5-large.col-12-medium {
+		padding-right: 50px;
+	}
+
 	.row {
 		display: flex;
 		flex-wrap: wrap;
@@ -1129,6 +1143,10 @@ footer>p {
 
 @media screen and (max-width: 980px) {
 
+	.col-4.col-5-large.col-12-medium {
+		padding-right: 0px;
+	}
+
 	.row {
 		display: flex;
 		flex-wrap: wrap;
@@ -1373,6 +1391,10 @@ footer>p {
 }
 
 @media screen and (max-width: 736px) {
+	
+	.col-4.col-5-large.col-12-medium {
+		padding-right: 0px;
+	}
 
 	.row {
 		display: flex;
