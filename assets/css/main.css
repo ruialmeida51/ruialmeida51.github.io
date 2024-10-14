@@ -206,8 +206,6 @@ a {
 	text-decoration: underline;
 }
 
-
-
 a img {
 	border: 0;
 }
@@ -2315,7 +2313,7 @@ body>article {
 	button,
 	.button {
 		text-align: center;
-		font-size: 1.25em;
+		font-size: 1em;
 		width: 100%;
 		padding: 1em 0 1em 0;
 	}
@@ -2325,7 +2323,7 @@ body>article {
 	input[type="reset"].large,
 	button.large,
 	.button.large {
-		font-size: 0.8em;
+		font-size: 1.25em;
 		letter-spacing: 0;
 	}
 
