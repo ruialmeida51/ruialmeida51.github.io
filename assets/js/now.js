@@ -4,8 +4,8 @@
  */
 window.NOW = {
 	playing: "Retro classics, with WoW Forever on the horizon",
-	building: "Plannot & mrweble",
-	learning: "Kotlin / Compose Multiplatform, and how to stay sharp alongside AI",
+	building: "Plannot & Mr. Weble",
+	exploring: "Using AI without outsourcing my thinking",
 	listening: "Guitar practice, mostly mine",
 
 	// WoW Forever launch, reported as 4 Nov 2026. Sources disagree on the exact hour,
