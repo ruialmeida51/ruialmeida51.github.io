@@ -29,21 +29,31 @@
 		el.textContent = new Date().getFullYear() - Number(el.getAttribute("data-years-since"));
 	});
 
-	// WoW Forever countdown.
+	// WoW Forever countdown: ticks every second.
 	var cd = document.getElementById("wow-countdown");
 	if (cd) {
 		var target = now.wowForever ? Date.parse(now.wowForever) : NaN;
+		var units = { d: cd.querySelector("[data-u=d]"), h: cd.querySelector("[data-u=h]"), m: cd.querySelector("[data-u=m]"), s: cd.querySelector("[data-u=s]") };
+		var note = document.getElementById("wow-note");
+		var pad = function (n) { return n < 10 ? "0" + n : String(n); };
+		var tick = function () {
+			var ms = target - Date.now();
+			if (ms <= 0) {
+				cd.hidden = true;
+				if (note) note.textContent = "It's live. FOR THE ALLIANCE! \u2694\uFE0F";
+				return true;
+			}
+			units.d.textContent = Math.floor(ms / 864e5);
+			units.h.textContent = pad(Math.floor(ms / 36e5) % 24);
+			units.m.textContent = pad(Math.floor(ms / 6e4) % 60);
+			units.s.textContent = pad(Math.floor(ms / 1e3) % 60);
+			return false;
+		};
 		if (isNaN(target)) {
-			cd.textContent = "release: soon™";
-		} else {
-			var tick = function () {
-				var ms = target - Date.now();
-				if (ms <= 0) { cd.textContent = "It's live. For the Alliance!"; return; }
-				var d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
-				cd.textContent = d + "d " + h + "h " + m + "m to go";
-			};
-			tick();
-			setInterval(tick, 30000);
+			cd.hidden = true;
+			if (note) note.textContent = "release: soon\u2122";
+		} else if (!tick()) {
+			var timer = setInterval(function () { if (tick()) clearInterval(timer); }, 1000);
 		}
 	}
 

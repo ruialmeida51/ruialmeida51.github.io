@@ -191,7 +191,12 @@ section.alt { background: var(--bg-alt); border-block: 1px solid var(--line); }
 	border-color: color-mix(in srgb, var(--accent-2) 55%, var(--line));
 }
 .wow h3 { font-size: 1.4rem; }
-.countdown { display: inline-block; margin-top: 4px; font: 700 1.05rem var(--mono); color: var(--accent); }
+.countdown { display: flex; gap: 10px; margin: 18px 0 8px; flex-wrap: wrap; }
+.countdown[hidden] { display: none; }
+.countdown div { min-width: 74px; padding: 10px 12px; text-align: center; background: var(--bg); border: 1px solid var(--accent-2); border-radius: 10px; }
+.countdown b { display: block; font: 700 1.7rem/1.1 var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; }
+.countdown span { font: .7rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.countdown-note { margin: 0; font-size: .8rem; color: var(--muted); }
 
 /* Contact / footer */
 .contact { text-align: center; }

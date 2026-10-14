@@ -8,7 +8,8 @@ window.NOW = {
 	learning: "Kotlin / Compose Multiplatform, and how to stay sharp alongside AI",
 	listening: "Guitar practice, mostly mine",
 
-	// ISO date of the WoW Forever release, e.g. "2027-01-15T00:00:00Z".
-	// Leave null until there's a real date, the page shows "release: soon™".
-	wowForever: null
+	// WoW Forever launch, reported as 4 Nov 2026. Sources disagree on the exact hour,
+	// so this counts to midnight UTC: set the real launch time here when you know it,
+	// e.g. "2026-11-04T22:00:00Z".
+	wowForever: "2026-11-04T00:00:00Z"
 };
