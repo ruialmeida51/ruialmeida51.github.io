@@ -3,7 +3,7 @@
  * live bits, no HTML needed.
  */
 window.NOW = {
-	playing: "Retro classics, with WoW Forever on the horizon",
+	playing: "RuneScape, with WoW Forever on the horizon",
 	building: "Plannot & Mr. Weble",
 	exploring: "Using AI without outsourcing my thinking",
 	listening: "Guitar practice, mostly mine",
