@@ -224,7 +224,6 @@ footer p { margin: 0 0 4px; }
 
 /* Company groups in the quest log */
 .company h3 { font-size: 1.5rem; color: var(--accent); margin: 2px 0 6px; }
-.company-note { color: var(--muted); max-width: 70ch; margin: 0 0 4px; }
 .sub { list-style: none; margin: 18px 0 0; padding: 0 0 0 22px; border-left: 2px solid var(--line); }
 .step { position: relative; margin-bottom: 30px; }
 .step:last-child { margin-bottom: 0; }
