@@ -29,16 +29,6 @@
 		el.textContent = new Date().getFullYear() - Number(el.getAttribute("data-years-since"));
 	});
 
-	// Duration of the current role, so it never goes stale.
-	document.querySelectorAll("[data-duration]").forEach(function (el) {
-		var parts = el.getAttribute("data-duration").split("-"), d = new Date();
-		var total = (d.getFullYear() - Number(parts[0])) * 12 + (d.getMonth() + 1 - Number(parts[1])) + 1 + Number(el.getAttribute("data-plus") || 0);
-		var y = Math.floor(total / 12), mo = total % 12, out = [];
-		if (y) out.push(y + (y === 1 ? " yr" : " yrs"));
-		if (mo || !y) out.push(mo + (mo === 1 ? " mo" : " mos"));
-		el.textContent = out.join(" ");
-	});
-
 	// WoW Forever countdown: ticks every second.
 	var cd = document.getElementById("wow-countdown");
 	if (cd) {
