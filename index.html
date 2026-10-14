@@ -1,128 +1,318 @@
-<!DOCTYPE HTML>
-<!--
-	Miniport by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
 <head>
-	<title>Eyther/Rui Portfolio</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Rui aka Eyther | Senior Software Engineer</title>
+	<meta name="description" content="Senior mobile engineer (Kotlin & Compose Multiplatform), side-project tinkerer, paladin main. A living CV.">
+	<meta name="theme-color" content="#0d1117">
+	<meta property="og:title" content="Rui aka Eyther | Senior Software Engineer">
+	<meta property="og:description" content="A living CV: work, side projects, and the stuff I do off the clock.">
+	<meta property="og:type" content="website">
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script>
+		// Set theme before first paint to avoid a flash.
+		try {
+			var t = localStorage.getItem("theme");
+			if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+			document.documentElement.setAttribute("data-theme", t);
+		} catch (e) {}
+	</script>
 </head>
+<body>
 
-<body class="is-preload">
+<header class="nav">
+	<div class="wrap">
+		<a class="brand" href="#top">eyther<span>.dev</span></a>
+		<ul>
+			<li><a href="#about">About</a></li>
+			<li><a href="#experience">Experience</a></li>
+			<li><a href="#skills">Skills</a></li>
+			<li><a href="#projects">Projects</a></li>
+			<li><a href="#ai">AI</a></li>
+			<li><a href="#offclock">Off the clock</a></li>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+		<button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle light/dark theme" aria-pressed="false">🌓</button>
+	</div>
+</header>
 
-	<!-- Nav -->
-	<nav id="nav">
-	</nav>
+<main id="top">
 
-	<!-- Home -->
-	<article id="top" class="wrapper style1">
-		<div class="container">
-			<div class="row">
-				<div class="col-4 col-5-large col-12-medium">
-					<span class="image fit avatar"><img src="images/img_avatar.jpg" alt="" /></span>
-					<p style="text-align: center;"> 🎒 Currently working @ <a href="https://mindera.com/" target="_blank">Mindera</a></p>
-
-					<button class="button" onclick="window.open('resume/cv.pdf', '_blank');">📔 Check out my CV</button>
+	<!-- Hero -->
+	<section class="hero">
+		<div class="wrap">
+			<div class="hero-grid">
+				<div>
+					<p class="eyebrow">Senior Software Engineer</p>
+					<h1>Heya, I'm <em>Rui</em>,<br>aka Eyther. 👋</h1>
+					<p class="lead">I build mobile apps with Kotlin and Compose Multiplatform, mentor the next wave of engineers, and tank for my friends in video games.</p>
+					<div class="cta">
+						<a class="btn primary" href="#projects">See what I'm building</a>
+						<a class="btn" href="#contact">Get in touch</a>
+					</div>
 				</div>
-				
-				<div class="col-8 col-7-large col-12-medium">
-					<header>
-						<h1>Heya! 👋 I'm <strong>Rui aka Eyther</strong>.</h1>
-					</header>
-					<h3>What do I do?</h3>
-					<p>📚 I have a degree in <strong>Software Engineering</strong>, and try my best to live up to the
-						title of one. I've been developing Android 🤖 applications since 2019! Delving into the world of <strong>Kotlin Multiplatform</strong> since 2025👷</p>
-</body>
-
-<h3>What am I passionate about?</h3>
-
-<p>🛠️ I enjoy <strong>tinkering</strong>, especially when you consider how many times I've disassembled my computers.
-	<br>🎾 I'm working on my <strong>tennis</strong>, hopefully I won't do as bad in coding as I do in the court.<br>🎮
-	<strong>Retro Gaming</strong> is slowly growing on me, and I've already dusted off my PS1 and PS2. Despite all the
-	regular gaming, of course.<br>👨‍💻 Lately I've also been investing some of my time in <strong>open-source</strong>
-	projects.</p>
-
-<button href="#portfolio" class="button scrolly">👀 Take a look at what I've been doing</button>
-</div>
-</div>
-</div>
-</article>
-
-<!-- Portfolio -->
-<article id="portfolio" class="wrapper style3">
-	<div class="container">
-		<header>
-			<h2>🤸 Here's what I've been up to</h2>
-			<p>Please, do take a look at my shenanigans below</p>
-		</header>
-		<div class="row">
-			<div class="col-4 col-6-medium col-12-small">
-				<article class="box style2">
-					<a href="https://github.com/ruialmeida51/lumbridge-android" target="_blank"
-						class="image featured"><img src="images/img_loom_preview.png" alt="" /></a>
-					<h3><a href="https://github.com/ruialmeida51/lumbridge-android" target="_blank">Loom App</a></h3>
-					<p>🤖 An Open-Source Android application to learn Jetpack Compose</p>
-				</article>
+				<img class="avatar" src="images/avatar.jpg" width="260" height="260" alt="Selfie of Rui with sunglasses on his forehead, smiling, with green hills behind him">
 			</div>
-			<div class="col-4 col-6-medium col-12-small">
-				<article class="box style2">
-					<a href="https://publiset.pt" target="_blank" class="image featured"><img
-							src="images/img_publiset_preview.png" alt="" /></a>
-					<h3><a href="https://publiset.pt" target="_blank">Publiset.pt</a></h3>
-					<p>🚀 Freelance job to build a company website page. Made in VueJS and Strapi.</p>
-				</article>
+
+			<dl class="now" aria-label="What I'm up to right now">
+				<div><dt><span class="live-dot" aria-hidden="true"></span>Playing</dt><dd data-now="playing">Retro classics</dd></div>
+				<div><dt>Building</dt><dd data-now="building">Side projects</dd></div>
+				<div><dt>Learning</dt><dd data-now="learning">Compose Multiplatform</dd></div>
+				<div><dt>Practising</dt><dd data-now="listening">Guitar</dd></div>
+			</dl>
+		</div>
+	</section>
+
+	<!-- About -->
+	<section id="about">
+		<div class="wrap about-grid">
+			<div class="reveal">
+				<p class="eyebrow">01 / About</p>
+				<h2>An engineer who likes to understand things.</h2>
+				<p>I have a degree in Software Engineering and I try my best to live up to the title. I've been writing Android apps since 2019, and since 2025 I've been going deep on Kotlin Multiplatform: shared domain and data layers, native UI where it matters.</p>
+				<p>I like owning my features end to end, working closely with product and design, and leaving codebases a bit more modern and testable than I found them. I also mentor graduates, which is one of the best parts of the job: explaining something out loud is the fastest way to find out whether you actually understand it.</p>
+				<p>Away from work I tinker with everything: computers I've taken apart far too many times, home servers, open-source side projects. Curiosity is the common thread.</p>
 			</div>
-			<div class="col-4 col-6-medium col-12-small">
-				<article class="box style2">
-					<a href="#" class="image featured"><img src="images/default_img_03.jpg" alt="" /></a>
-					<h3><a href="#">🧑‍🍳 More projects cooking in the oven..</a></h3>
-					<p>Nothing here. At least, yet.</p>
-				</article>
+			<div class="stats reveal">
+				<div class="stat"><b><span data-years-since="2019">7</span>+</b><span>years building Android apps</span></div>
+				<div class="stat"><b>KMP</b><span>and Compose Multiplatform since 2025</span></div>
+				<div class="stat"><b>3</b><span>companies, from intern to senior</span></div>
+				<div class="stat"><b>2</b><span>side projects shipping now</span></div>
 			</div>
 		</div>
-		<footer>
-			<button href="#socials" class="button scrolly">👨‍🦱 Check out my socials</button>
-		</footer>
-</article>
+	</section>
 
-<!-- Contact -->
-<article id="socials" class="wrapper style2">
-	<div class="container medium">
-		<header>
-			<h2>🎉 That's everything</h2>
-			<p>Here are my socials, get in touch!</p>
-			<ul class="social">
-				<li><a href="https://github.com/ruialmeida51" target="_blank" class="icon brands fa-github"><span
-							class="label">Github</span></a></li>
-				<li><a href="https://www.linkedin.com/in/ruialmeida51/" target="_blank"
-						class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-				<li><a href="https://x.com/haitatchy" target="_blank" class="icon brands fa-twitter"><span
-							class="label">Twitter</span></a></li>
-			</ul>
-		</header>
-		<button href="#top" class="button scrolly">⬆️ Take me up there again!</button>
-		<footer>
-			<ul id="copyright">
-				<li>Made with a lil bit of ☕</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</footer>
+	<!-- Experience -->
+	<section id="experience" class="alt">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">02 / Experience</p>
+				<h2>The quest log.</h2>
+				<p>Where I've worked, what I owned, and what I'd like to think I improved.</p>
+			</div>
+			<ol class="timeline">
+				<li class="role current reveal">
+					<div class="role-meta">2025 – now</div>
+					<h3>Senior Mobile Developer <span class="org">@ Mindera</span></h3>
+					<div class="role-meta">Client: Kingfisher Group (B&amp;Q and TradePoint)</div>
+					<p>Building two apps on a shared codebase: the domain and data layers are Kotlin Multiplatform, exported as a binary framework for iOS, with native UI on both platforms (Compose on Android). Also maintaining a Compose Desktop target as a proof of concept to grow a multiplatform mindset. I own my features, work closely with product and design, and help steer the project's technical direction.</p>
+					<ul class="tags"><li>Kotlin Multiplatform</li><li>Compose Multiplatform</li><li>iOS interop</li><li>Mentoring</li></ul>
+				</li>
+				<li class="role reveal">
+					<div class="role-meta">2024 – 2025</div>
+					<h3>Senior Android Developer <span class="org">@ YNAP Group</span></h3>
+					<div class="role-meta">Net-A-Porter, Mr Porter, The Outnet</div>
+					<p>Shipped features across several apps with full ownership. Improved the CI/CD pipeline with GitHub Actions, tackling performance and stability. Introduced Jetpack Compose to production and built widgets with Jetpack Glance.</p>
+					<ul class="tags"><li>Jetpack Compose</li><li>Glance</li><li>GitHub Actions</li></ul>
+				</li>
+				<li class="role reveal">
+					<div class="role-meta">2023 – 2024</div>
+					<h3>Android Developer <span class="org">@ Hole19</span></h3>
+					<p>Alongside day-to-day features, helped migrate the app from a legacy view-based MVP architecture to a modern, testable one (MVVM, Coroutines, Flow, Compose). Contributed to design decisions, and got to work on Wear OS.</p>
+					<ul class="tags"><li>MVVM</li><li>Coroutines &amp; Flow</li><li>Compose</li><li>Wear OS</li></ul>
+				</li>
+				<li class="role reveal">
+					<div class="role-meta">2021 – 2023</div>
+					<h3>Android Developer <span class="org">@ Mindera</span></h3>
+					<div class="role-meta">Client: Waitrose Groceries</div>
+					<p>Worked directly with the client and owned my features. Part of the team that moved XML layouts to Compose, introduced the Navigation Component, and replaced RxJava with Coroutines and Flow. Migrated CI/CD from a locally run Jenkins to Bitrise, improving build speed and cutting build failures.</p>
+					<ul class="tags"><li>Compose migration</li><li>Navigation</li><li>RxJava → Flow</li><li>Bitrise</li></ul>
+				</li>
+				<li class="role reveal">
+					<div class="role-meta">2019 – 2021</div>
+					<h3>Android Developer <span class="org">@ Mindera</span></h3>
+					<div class="role-meta">Client: Smartbox (Beneficiary Smartbox Partner)</div>
+					<p>Maintained and grew the project as part of the client's team, coordinating features with design and product. Grew a lot here, thanks to a great team.</p>
+				</li>
+				<li class="role reveal">
+					<div class="role-meta">Feb – Sep 2019</div>
+					<h3>Android Intern <span class="org">@ Mindera</span></h3>
+					<p>First contact with mobile: built an internal tool from scratch so employees could manage their own information, from scheduling vacations to updating profiles. Learned app architecture, reactive programming and agile delivery.</p>
+				</li>
+			</ol>
+		</div>
+	</section>
+
+	<!-- Skills -->
+	<section id="skills">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">03 / Skills</p>
+				<h2>The build.</h2>
+				<p>What I reach for, grouped by what I use it for.</p>
+			</div>
+			<div class="skills">
+				<div class="card reveal">
+					<h3>📱 Mobile</h3>
+					<ul class="tags"><li>Kotlin</li><li>Kotlin Multiplatform</li><li>Jetpack Compose</li><li>Compose Multiplatform</li><li>Glance</li><li>Wear OS</li></ul>
+				</div>
+				<div class="card reveal">
+					<h3>🏗️ Architecture</h3>
+					<ul class="tags"><li>MVVM</li><li>Coroutines &amp; Flow</li><li>Clean-ish layering</li><li>Navigation</li><li>Testing</li></ul>
+				</div>
+				<div class="card reveal">
+					<h3>⚙️ Delivery</h3>
+					<ul class="tags"><li>GitHub Actions</li><li>Bitrise</li><li>Jenkins (migrated away)</li><li>Play Store &amp; App Store releases</li></ul>
+				</div>
+				<div class="card reveal">
+					<h3>🌐 Web &amp; backend</h3>
+					<ul class="tags"><li>Vue</li><li>Strapi</li><li>Static sites</li></ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Projects -->
+	<section id="projects" class="alt">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">04 / Projects</p>
+				<h2>Things I made on purpose.</h2>
+				<p>Side projects, open source and freelance work.</p>
+			</div>
+			<div class="projects">
+
+				<article class="card project reveal">
+					<div class="shot placeholder-shot"><span class="placeholder">Plannot</span></div>
+					<div class="project-body">
+						<h3>Plannot <span class="badge">Live on Android</span></h3>
+						<!-- TODO(rui): replace with a real one-liner about what Plannot does -->
+						<p>A side project of mine, now on Google Play. iOS is next on the list.</p>
+						<ul class="tags"><li>Android</li><li>Kotlin</li><li>iOS (soon)</li></ul>
+						<div class="links">
+							<a href="https://plannot.com" target="_blank" rel="noopener">Website ↗</a>
+							<a href="https://play.google.com/store/apps/details?id=com.plannot.app" target="_blank" rel="noopener">Google Play ↗</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card project reveal">
+					<div class="shot placeholder-shot"><span class="placeholder">mrweble</span></div>
+					<div class="project-body">
+						<h3>mrweble <span class="badge">New</span></h3>
+						<!-- TODO(rui): replace with a real one-liner about what mrweble is -->
+						<p>Another side project, with its own home on the web.</p>
+						<ul class="tags"><li>Web</li></ul>
+						<div class="links">
+							<a href="https://mrweble.com" target="_blank" rel="noopener">Website ↗</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card project reveal">
+					<div class="shot logo"><img src="images/loom.png" width="512" height="512" alt="Loom app logo"></div>
+					<div class="project-body">
+						<h3>Loom <span class="badge">Open source</span></h3>
+						<p>An Android app I designed and built entirely on my own: architecture, Compose UI, design, testing and deployment. Now being converted to Kotlin and Compose Multiplatform so it can target iOS too.</p>
+						<ul class="tags"><li>Kotlin</li><li>Jetpack Compose</li><li>KMP (in progress)</li></ul>
+						<div class="links">
+							<a href="https://github.com/ruialmeida51/lumbridge-android" target="_blank" rel="noopener">Source ↗</a>
+						</div>
+					</div>
+				</article>
+
+				<article class="card project reveal">
+					<div class="shot"><img src="images/publiset.png" width="384" height="269" alt="Screenshot of the Publiset website"></div>
+					<div class="project-body">
+						<h3>Publiset.pt <span class="badge">Freelance</span></h3>
+						<p>A company website built for a client with Vue and Strapi, from design conversations to launch.</p>
+						<ul class="tags"><li>Vue</li><li>Strapi</li></ul>
+						<div class="links">
+							<a href="https://publiset.pt" target="_blank" rel="noopener">Website ↗</a>
+						</div>
+					</div>
+				</article>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- AI -->
+	<section id="ai">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">05 / AI</p>
+				<h2>Using AI without my brain turning to paste.</h2>
+				<p>I use AI every day and I like it. I also don't want to forget how to think. So I run it with some rules.</p>
+			</div>
+
+			<ol class="steps reveal">
+				<li><b>Paper first</b>I handwrite what I want to build. No screen, no autocomplete.</li>
+				<li><b>Rough draft</b>A quick throwaway sketch in code to see if the idea is even feasible.</li>
+				<li><b>Get roasted</b>I talk it through with an AI and ask it to tear my solution apart.</li>
+				<li><b>Iterate</b>Rinse and repeat until I'm happy with every detail.</li>
+				<li><b>Implement</b>Only now does the AI write it, usually in one go, because the thinking is done.</li>
+			</ol>
+
+			<div class="ai-cols">
+				<div class="card reveal">
+					<h3>For the complex stuff</h3>
+					<p>I plan with a stronger model (Opus) and execute with a faster one (Sonnet). At work that happens through Copilot; on side projects and other Mindera work I use Claude.</p>
+				</div>
+				<div class="card reveal">
+					<h3>For the tiny stuff</h3>
+					<p>Flipping a feature toggle, fixing a small bug: I let the AI rip on auto mode. Not everything deserves a ceremony.</p>
+				</div>
+			</div>
+
+			<blockquote class="quote reveal">The paper is the point. It keeps my brain sharp while the machine does the typing.</blockquote>
+		</div>
+	</section>
+
+	<!-- Off the clock -->
+	<section id="offclock" class="alt">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">06 / Off the clock</p>
+				<h2>The side quests.</h2>
+				<p>The things that keep me me.</p>
+			</div>
+			<div class="hobbies">
+				<article class="card wow reveal">
+					<h3>⚔️ WoW Forever: paladin tank, reporting for duty</h3>
+					<p>I'm unreasonably excited to go back to the game I love so much, the one that wandered away from its roots. Give me a shield, a hammer and a dungeon group to keep alive, and I'll feel like a teenager again. <strong>FOR THE ALLIANCE!</strong></p>
+					<span class="countdown" id="wow-countdown" aria-live="polite">release: soon™</span>
+				</article>
+				<article class="card hobby reveal"><span class="emoji">🎸</span><h3>Guitar</h3><p>Slowly getting better, loudly.</p></article>
+				<article class="card hobby reveal"><span class="emoji">🎾</span><h3>Tennis</h3><p>Hoping I do better at code than I do on the court.</p></article>
+				<article class="card hobby reveal"><span class="emoji">🕹️</span><h3>Retro gaming</h3><p>PS1 and PS2 are dusted off and very much in use, alongside regular gaming.</p></article>
+				<article class="card hobby reveal"><span class="emoji">🖥️</span><h3>Tinkering</h3><p>I've taken my computers apart more times than I can count, and have been building my own home media servers.</p></article>
+				<article class="card hobby reveal"><span class="emoji">🚆</span><h3>Better cities</h3><p>Public transit, streets designed for people, and high-speed rail. Infrastructure is my nerdiest non-code obsession.</p></article>
+				<article class="card hobby reveal"><span class="emoji">🌍</span><h3>Open source</h3><p>Increasingly where my free time goes.</p></article>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact -->
+	<section id="contact" class="contact">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">07 / Contact</p>
+				<h2>Say hi.</h2>
+				<p>Want to talk Kotlin, KMP, side projects, trains or guitars? Reach out.</p>
+			</div>
+			<div class="socials reveal">
+				<a class="btn" href="https://github.com/ruialmeida51" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+				<a class="btn" href="https://www.linkedin.com/in/ruialmeida51/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.13 2.06 2.06 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+				<a class="btn" href="https://x.com/haitatchy" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41z"/></svg>X</a>
+			</div>
+			<!-- TODO(rui): add a downloadable CV link here once the updated PDF is ready -->
+		</div>
+	</section>
+</main>
+
+<footer>
+	<div class="wrap">
+		<p>Built by hand (and a little help), no frameworks. Powered by ☕ and nostalgia.</p>
+		<p class="mono">psst: try the Konami code.</p>
 	</div>
-</article>
+</footer>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/js/now.js"></script>
 <script src="assets/js/main.js"></script>
-
 </body>
-
 </html>
