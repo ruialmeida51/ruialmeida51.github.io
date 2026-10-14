@@ -175,9 +175,6 @@ section.alt { background: var(--bg-alt); border-block: 1px solid var(--line); }
 .badge { font: 600 .68rem var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; background: var(--glow); color: var(--accent); border: 1px solid var(--accent); }
 .links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 14px; font-size: .92rem; font-weight: 600; }
 
-/* AI */
-.quote { margin: 0; padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 var(--radius) var(--radius) 0; font-size: 1.1rem; }
-
 /* Off the clock */
 .hobbies { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
 .hobby .emoji { font-size: 1.8rem; display: block; margin-bottom: 8px; }

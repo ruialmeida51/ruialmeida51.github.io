@@ -6,7 +6,7 @@ window.NOW = {
 	playing: "RuneScape, with WoW Forever on the horizon",
 	building: "Plannot & Mr. Weble",
 	exploring: "Using AI without outsourcing my thinking",
-	listening: "Guitar practice, mostly mine",
+	listening: "Guitar, tennis and the gym",
 
 	// WoW Forever launch, reported as 4 Nov 2026. Sources disagree on the exact hour,
 	// so this counts to midnight UTC: set the real launch time here when you know it,
