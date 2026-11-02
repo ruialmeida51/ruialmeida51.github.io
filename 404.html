@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Page not found | Rui aka Eyther</title>
+	<meta name="robots" content="noindex">
+	<meta name="theme-color" content="#0d1117">
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E">
+	<!-- Absolute paths: this page is served for any missing URL, at any depth. -->
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/season.css">
+	<link rel="stylesheet" href="/assets/css/secrets.css">
+	<script src="/assets/js/season.js"></script>
+	<script>
+		// Set theme before first paint to avoid a flash.
+		try {
+			var t = localStorage.getItem("theme");
+			if (!t) t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+			document.documentElement.setAttribute("data-theme", t);
+		} catch (e) {}
+	</script>
+	<style>
+		.nf { min-height: 62vh; display: grid; align-items: center; padding: 48px 0; }
+		.nf h1 { font-size: clamp(2.2rem, 7vw, 4rem); }
+		.nf .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+		.nf .code { font: 700 clamp(4rem, 16vw, 9rem)/1 var(--mono); color: var(--accent); margin: 0 0 8px; }
+	</style>
+</head>
+<body>
+
+<header class="nav">
+	<div class="wrap">
+		<a class="brand" href="/">eyther<span>.dev</span></a>
+		<ul>
+			<li><a href="/">Home</a></li>
+			<li><a href="/blog/">Blog</a></li>
+			<li><a href="/grind/">The Grind</a></li>
+		</ul>
+		<button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle light/dark theme" aria-pressed="false">🌓</button>
+	</div>
+</header>
+
+<main class="nf">
+	<div class="wrap">
+		<p class="code mono">404</p>
+		<h1>I can't reach that!</h1>
+		<p class="lead">This page doesn't exist, or I moved it. Happens to the best of adventurers.</p>
+		<div class="actions">
+			<a class="btn primary" href="/">Back to the homepage</a>
+			<a class="btn" href="/blog/">Blog</a>
+			<a class="btn" href="/grind/">The Grind</a>
+		</div>
+		<p class="mono" style="margin-top:28px;color:var(--muted);font-size:.85rem">psst: this site has secrets. Try typing "help".</p>
+	</div>
+</main>
+
+<footer>
+	<div class="wrap">
+		<p>Powered by ☕ and nostalgia.</p>
+	</div>
+</footer>
+
+<script src="/assets/js/now.js"></script>
+<script src="/assets/js/main.js"></script>
+<script src="/assets/js/secrets.js"></script>
+</body>
+</html>
