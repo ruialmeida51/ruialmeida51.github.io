@@ -7,8 +7,8 @@
 (function () {
 	"use strict";
 	var SEASONS = [
-		{ id: "halloween", from: [10, 20], to: [11, 2], decor: ["🎃", "🦇", "👻"], brand: "🎃" },
-		{ id: "christmas", from: [12, 18], to: [12, 31], decor: ["❄️", "❄️", "🎄"], brand: "🎄" }
+		{ id: "halloween", from: [10, 20], to: [11, 2], decor: ["🎃", "🦇"], brand: "🎃" },
+		{ id: "christmas", from: [12, 18], to: [12, 31], decor: ["🎄", "❄️"], brand: "🎄" }
 	];
 	// Shown in the footer on the day itself.
 	var BIRTHDAYS = [
@@ -45,17 +45,16 @@
 		if (old) old.remove();
 		if (!s) { root.removeAttribute("data-season"); return; }
 		root.setAttribute("data-season", s.id);
-		if (matchMedia("(prefers-reduced-motion: reduce)").matches || !document.body) return;
+		if (!document.body) return;
 		var box = document.createElement("div");
 		box.className = "sx-decor";
 		box.setAttribute("aria-hidden", "true");
-		for (var i = 0; i < 10; i++) {
+		// Static and quiet: a few emoji tucked into the bottom corners.
+		for (var i = 0; i < 4; i++) {
 			var e = document.createElement("span");
 			e.textContent = s.decor[i % s.decor.length];
-			e.style.left = (6 + i * 9.5) + "%";
-			e.style.animationDelay = (-i * 1.7) + "s";
-			e.style.animationDuration = (14 + (i % 4) * 4) + "s";
-			e.style.fontSize = (14 + (i % 3) * 6) + "px";
+			e.className = i < 2 ? "l" : "r";
+			e.style.bottom = (10 + (i % 2) * 34) + "px";
 			box.appendChild(e);
 		}
 		document.body.appendChild(box);

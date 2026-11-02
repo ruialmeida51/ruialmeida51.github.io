@@ -9,9 +9,8 @@
 :root[data-season="halloween"] .brand::after { content: " 🎃"; }
 :root[data-season="christmas"] .brand::after { content: " 🎄"; }
 
-.sx-decor { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
-.sx-decor span { position: absolute; top: -40px; opacity: .55; animation: sx-fall linear infinite; }
-:root[data-season="halloween"] .sx-decor span { animation-name: sx-float; top: auto; bottom: -40px; }
-@keyframes sx-fall { to { transform: translateY(110vh) rotate(180deg); } }
-@keyframes sx-float { to { transform: translateY(-110vh) rotate(-25deg); } }
-@media (prefers-reduced-motion: reduce) { .sx-decor { display: none; } }
+.sx-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.sx-decor span { position: absolute; font-size: 22px; opacity: .5; }
+.sx-decor .l { left: 14px; }
+.sx-decor .r { right: 14px; }
+@media (max-width: 720px) { .sx-decor { display: none; } }
