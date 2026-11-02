@@ -304,7 +304,7 @@
 	function calibration(root, st) {
 		clear(root);
 		if (st.cal.n < 5) {
-			root.appendChild(mk("p", "gr-empty", "Unlocks after 5 sessions with a confidence rating (" + st.cal.n + " so far)."));
+			root.appendChild(mk("p", "gr-empty", "The game won't tell me how wrong I am until I've rated 5 sessions (" + st.cal.n + " so far)."));
 		} else {
 			root.appendChild(mk("p", "gr-verdict", st.cal.verdict));
 			root.appendChild(calRow("How sure I said I was", st.cal.conf));
@@ -316,7 +316,7 @@
 	function sessionLog(root, st) {
 		clear(root);
 		if (!st.sessions.length) {
-			root.appendChild(mk("p", "gr-empty", "Nothing logged yet. The first session is always the hardest, check back soon."));
+			root.appendChild(mk("p", "gr-empty", "Hans: Hello. What are you doing here? Nothing logged yet. Go on, earn some XP."));
 			return;
 		}
 		var names = {};
@@ -409,7 +409,7 @@
 				if (page) { renderPage(st); levelUps(st); }
 			})
 			.catch(function () {
-				var msg = "Couldn't load the scoreboard right now.";
+				var msg = "Connection lost. Please wait - attempting to reestablish. (The scoreboard didn't load.)";
 				if (card) { clear(card); card.appendChild(mk("p", "gr-note", msg)); }
 				if (page) {
 					var l = document.getElementById("gr-log");
