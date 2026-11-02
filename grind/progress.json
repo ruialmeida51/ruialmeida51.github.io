@@ -10,5 +10,7 @@
 		{ "id": "compose", "name": "Compose runtime", "short": "Compose" },
 		{ "id": "kmp", "name": "KMP boundaries & internals", "short": "KMP" }
 	],
-	"sessions": []
+	"sessions": [
+		{ "date": "2026-11-02", "type": "decision", "topic": "sync", "confidence": 3, "result": "partly", "note": "Tombstones for deletes; server-ordered versions over client clocks" }
+	]
 }
