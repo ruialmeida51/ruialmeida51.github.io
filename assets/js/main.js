@@ -68,20 +68,4 @@
 		}, { threshold: 0.12 });
 		items.forEach(function (el) { io.observe(el); });
 	}
-
-	// Konami code: for the Alliance.
-	var seq = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65], pos = 0;
-	addEventListener("keydown", function (e) {
-		pos = e.keyCode === seq[pos] ? pos + 1 : (e.keyCode === seq[0] ? 1 : 0);
-		if (pos === seq.length) {
-			pos = 0;
-			root.classList.toggle("alliance");
-			var t = document.getElementById("toast");
-			if (t) {
-				t.textContent = root.classList.contains("alliance") ? "⚔️ FOR THE ALLIANCE!" : "Back to gold.";
-				t.classList.add("show");
-				setTimeout(function () { t.classList.remove("show"); }, 2400);
-			}
-		}
-	});
 })();

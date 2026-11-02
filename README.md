@@ -7,4 +7,5 @@ Plain HTML/CSS/JS, no build step. The only exception is `/blog`, which GitHub Pa
 - `assets/js/now.js`: the "Currently" strip and the WoW countdown date
 - `grind/`: The Grind skill tree (page, styles, script). `grind/progress.json` is the only file that changes: topics plus one entry per session (date, type, topic, confidence, result). Only public-safe data goes in it.
 - `blog/`, `_layouts/`, `_posts/`, `_drafts/`, `_config.yml`: the hand-written blog (Jekyll, built by GitHub Pages). See `WRITING.md`.
+- `assets/js/season.js`: date-based seasonal themes (edit the SEASONS table, preview with `?season=halloween`). `assets/js/secrets.js`: the hidden codes and the console (edit SECRETS).
 - `index.html`: all other content
