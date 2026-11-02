@@ -138,7 +138,7 @@
 				rv.appendChild(h);
 				rv.appendChild(mk("div", "an-text", a.review || ""));
 			} else {
-				rv.appendChild(mk("p", "gr-note", "Waiting for the review. The reviewer checks during the day, so it can take up to an hour."));
+				rv.appendChild(mk("p", "gr-note", "Waiting for the review. Answers are reviewed once a day, just after 12:00 on weekdays. Miss it and it waits for the next day."));
 			}
 			card.appendChild(rv);
 		}
