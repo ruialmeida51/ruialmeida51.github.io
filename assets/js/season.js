@@ -7,8 +7,8 @@
 (function () {
 	"use strict";
 	var SEASONS = [
-		{ id: "halloween", from: [10, 20], to: [11, 2], decor: ["🎃", "🦇"], brand: "🎃" },
-		{ id: "christmas", from: [12, 18], to: [12, 31], decor: ["🎄", "❄️"], brand: "🎄" }
+		{ id: "halloween", from: [10, 20], to: [11, 2], decor: ["👻", "🦇", "🎃"], brand: "🎃" },
+		{ id: "christmas", from: [12, 18], to: [12, 31], decor: ["❄️", "❄️", "🎄"], brand: "🎄" }
 	];
 	// Shown in the footer on the day itself.
 	var BIRTHDAYS = [
@@ -41,6 +41,7 @@
 	var season = pick();
 
 	function apply(s) {
+		if (window.sxScroll) { removeEventListener("scroll", window.sxScroll); removeEventListener("resize", window.sxScroll); window.sxScroll = null; }
 		var old = document.querySelector(".sx-decor");
 		if (old) old.remove();
 		if (!s) { root.removeAttribute("data-season"); return; }
@@ -49,13 +50,33 @@
 		var box = document.createElement("div");
 		box.className = "sx-decor";
 		box.setAttribute("aria-hidden", "true");
-		// Static and quiet: a few emoji tucked into the bottom corners.
-		for (var i = 0; i < 4; i++) {
+		// Quiet parallax: faint emoji that drift at different speeds as you scroll.
+		// With reduced motion they simply stay put.
+		var n = innerWidth < 720 ? 5 : 9, items = [];
+		for (var i = 0; i < n; i++) {
 			var e = document.createElement("span");
 			e.textContent = s.decor[i % s.decor.length];
-			e.className = i < 2 ? "l" : "r";
-			e.style.bottom = (10 + (i % 2) * 34) + "px";
+			var depth = 0.04 + ((i * 37) % 10) / 10 * 0.22;   // 0.04 .. 0.26
+			e.style.left = ((i * 41 + 7) % 92) + "%";
+			e.style.fontSize = (22 + depth * 90) + "px";      // deeper (faster) ones are bigger
 			box.appendChild(e);
+			items.push({ el: e, depth: depth, base: ((i * 53 + 11) % 100) / 100 });
+		}
+		var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches, ticking = false;
+		function place() {
+			ticking = false;
+			var h = innerHeight + 120, y = reduced ? 0 : scrollY;
+			for (var k = 0; k < items.length; k++) {
+				var it = items[k];
+				var pos = ((it.base * h - y * it.depth) % h + h) % h - 60;
+				it.el.style.transform = "translate3d(0," + pos.toFixed(1) + "px,0)";
+			}
+		}
+		place();
+		if (!reduced) {
+			window.sxScroll = function () { if (!ticking) { ticking = true; requestAnimationFrame(place); } };
+			addEventListener("scroll", window.sxScroll, { passive: true });
+			addEventListener("resize", window.sxScroll);
 		}
 		document.body.appendChild(box);
 	}
