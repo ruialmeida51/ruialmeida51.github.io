@@ -385,11 +385,59 @@
 	var HANS_URL = "https://fotbvouyrrwuoyinrryw.supabase.co";
 	var HANS_KEY = "sb_publishable_RXiIRWiyUSG887AJvP5XxQ_y4seOvRe";
 
+	// ---- today's question (public) + the "answer" button, which only works for the owner ----
+
+	function loadQuestion() {
+		var host = document.getElementById("gr-question");
+		if (!host || !window.fetch) return;
+		fetch(HANS_URL + "/rest/v1/questions?select=date,kind,topic,title,body&order=date.desc,id.desc&limit=1",
+			{ headers: { apikey: HANS_KEY } })
+			.then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+			.then(function (rows) {
+				clear(host);
+				if (!rows.length) {
+					host.appendChild(mk("p", "gr-empty", "Hans: Hello. What are you doing here? No quest today. Check back after the morning session."));
+					return;
+				}
+				var q = rows[0];
+				var card = mk("article", "card gr-q");
+				card.appendChild(mk("p", "gr-q-kind", q.kind.toUpperCase() + " · " + q.topic));
+				card.appendChild(mk("h3", null, q.title));
+				card.appendChild(mk("div", "gr-q-text", q.body));
+
+				// Cosmetic only: the real gate is the login plus row-level security in the database.
+				var owner = false;
+				try { owner = !!localStorage.getItem("sb-fotbvouyrrwuoyinrryw-auth-token"); } catch (e) {}
+				var req = mk("div", "gr-q-req");
+				req.appendChild(mk("p", "gr-q-reqtitle", "Quest requirements"));
+				var list = mk("ul", "gr-q-reqlist");
+				list.appendChild(mk("li", owner ? "met" : "unmet",
+					(owner ? "✔ " : "✘ ") + "Complete the quest “Owner of eyther.dev”"));
+				list.appendChild(mk("li", owner ? "met" : "unmet",
+					(owner ? "✔ " : "✘ ") + "Skill: Being Rui, level 1 (" + (owner ? "1" : "0") + "/1)"));
+				req.appendChild(list);
+				req.appendChild(mk("p", "gr-note", owner
+					? "Requirements met. Go on then."
+					: "You do not meet the requirements to start this quest. You may still answer it in your head, but no XP will be awarded."));
+				card.appendChild(req);
+
+				var a = mk("a", "btn primary", owner ? "Click here to answer" : "Click here to answer (if you dare)");
+				a.href = "answer/";
+				card.appendChild(a);
+				host.appendChild(card);
+			})
+			.catch(function () {
+				clear(host);
+				host.appendChild(mk("p", "gr-empty", "Connection lost. Please wait - attempting to reestablish. (The question didn't load.)"));
+			});
+	}
+
 	function init() {
 		var card = document.getElementById("grind-card");
 		var page = document.getElementById("grind-page");
 		var host = card || page;
 		if (!host || !window.fetch) return;
+		if (page) loadQuestion();
 		var cfg = fetch(host.getAttribute("data-src") || "progress.json", { cache: "no-cache" })
 			.then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); });
 		// Sessions live in Supabase (public, read-only key). If it is down, fall back to progress.json.

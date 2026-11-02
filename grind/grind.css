@@ -91,3 +91,16 @@
 .gr-steps li { margin-bottom: 10px; }
 .gr-steps li::marker { color: var(--accent); font-weight: 700; }
 .gr-steps b { color: var(--text); font-weight: 600; }
+
+/* Today's question */
+.gr-q { max-width: 760px; }
+.gr-q h3 { margin: 4px 0 10px; font-size: 1.25rem; color: var(--text); }
+.gr-q-kind { font: 600 .72rem var(--mono); letter-spacing: .1em; color: var(--accent) !important; margin: 0; }
+.gr-q-text { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; color: var(--text); }
+.gr-q-req { margin: 18px 0 16px; padding: 12px 14px; border: 1px dashed var(--line); border-radius: 8px; background: var(--bg); }
+.gr-q-reqtitle { font: 600 .72rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted) !important; margin: 0 0 6px; }
+.gr-q-reqlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; font-size: .92rem; }
+.gr-q-reqlist .unmet { color: #f85149; }
+.gr-q-reqlist .met { color: #3fb950; }
+:root[data-theme="light"] .gr-q-reqlist .unmet { color: #cf222e; }
+:root[data-theme="light"] .gr-q-reqlist .met { color: #1a7f37; }
