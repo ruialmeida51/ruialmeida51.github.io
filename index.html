@@ -11,6 +11,7 @@
 	<meta property="og:type" content="website">
 	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E">
 	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="sharpener/sharpener.css">
 	<script>
 		// Set theme before first paint to avoid a flash.
 		try {
@@ -29,6 +30,7 @@
 			<li><a href="#about">About</a></li>
 			<li><a href="#experience">Experience</a></li>
 			<li><a href="#projects">Projects</a></li>
+			<li><a href="#ai">AI</a></li>
 			<li><a href="#offclock">Off the clock</a></li>
 			<li><a href="#contact">Contact</a></li>
 		</ul>
@@ -224,11 +226,37 @@
 		</div>
 	</section>
 
-	<!-- Off the clock -->
-	<section id="offclock" class="alt">
+	<!-- AI -->
+	<section id="ai" class="alt">
 		<div class="wrap">
 			<div class="section-head reveal">
-				<p class="eyebrow">04 / Off the clock</p>
+				<p class="eyebrow">04 / AI</p>
+				<h2>Keeping the edge. 🪒</h2>
+				<p>I use AI every day, and I'm stubborn about still thinking for myself. So I train it, in public.</p>
+			</div>
+			<div class="ai-grid">
+				<article class="card reveal">
+					<h3>The routine</h3>
+					<ul class="points">
+						<li>A small engineering decision every weekday, answered from memory before any AI sees it.</li>
+						<li><b>No-AI Wednesdays:</b> tickets by hand, plus a lab on how Kotlin and Compose work inside.</li>
+						<li>An AI reviews my reasoning afterwards, and the result goes on the scoreboard.</li>
+					</ul>
+				</article>
+				<article class="card reveal">
+					<h3>The scoreboard</h3>
+					<div id="sharpener-card" data-src="sharpener/progress.json"><p class="sh-note">Loading the scoreboard…</p></div>
+					<a class="btn primary" href="sharpener/">Open the Sharpener →</a>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<!-- Off the clock -->
+	<section id="offclock">
+		<div class="wrap">
+			<div class="section-head reveal">
+				<p class="eyebrow">05 / Off the clock</p>
 				<h2>The side quests.</h2>
 				<p>The things that keep me me.</p>
 			</div>
@@ -259,7 +287,7 @@
 	<section id="contact" class="contact">
 		<div class="wrap">
 			<div class="section-head reveal">
-				<p class="eyebrow">05 / Contact</p>
+				<p class="eyebrow">06 / Contact</p>
 				<h2>Say hi.</h2>
 				<p>Want to talk Kotlin, KMP, side projects, trains or guitars? Reach out.</p>
 			</div>
@@ -284,5 +312,6 @@
 
 <script src="assets/js/now.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="sharpener/sharpener.js"></script>
 </body>
 </html>

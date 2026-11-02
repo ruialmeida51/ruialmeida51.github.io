@@ -1,0 +1,14 @@
+{
+	"schema": 1,
+	"started": "2026-11-02",
+	"topics": [
+		{ "id": "idempotency", "name": "Idempotency & retries", "short": "Idempotency" },
+		{ "id": "sync", "name": "Sync & conflict resolution", "short": "Sync" },
+		{ "id": "architecture", "name": "Architecture trade-offs", "short": "Architecture" },
+		{ "id": "coroutines", "name": "Coroutines internals", "short": "Coroutines" },
+		{ "id": "flow", "name": "Flow & StateFlow", "short": "Flow" },
+		{ "id": "compose", "name": "Compose runtime", "short": "Compose" },
+		{ "id": "kmp", "name": "KMP boundaries & internals", "short": "KMP" }
+	],
+	"sessions": []
+}
