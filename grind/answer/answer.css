@@ -1,11 +1,11 @@
 .an-wrap { display: grid; gap: 18px; }
 .an-top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 0; }
-.an-card { padding: 20px; max-width: 760px; }
+.an-card { padding: 20px; }
 .an-card h2 { margin: 6px 0 10px; font-size: 1.3rem; }
 .an-card h3 { margin: 16px 0 6px; font-size: .95rem; color: var(--muted); }
 .an-head { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .an-kind { font: 600 .72rem var(--mono); letter-spacing: .1em; color: var(--accent); }
-.an-text { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+.an-text { max-width: 75ch; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
 .an-form { display: grid; gap: 12px; margin-top: 14px; }
 .an-form input[type="email"], .an-form textarea {
 	width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--line);
