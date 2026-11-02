@@ -5,5 +5,5 @@ My living CV: work, side projects, and the stuff I do off the clock. Live at [ey
 Plain HTML/CSS/JS, no build step.
 
 - `assets/js/now.js`: the "Currently" strip and the WoW countdown date
-- `sharpener/`: the Sharpener scoreboard (page, styles, script). `sharpener/progress.json` is the only file that changes: topics plus one entry per session (date, type, topic, confidence, result). Only public-safe data goes in it.
+- `grind/`: The Grind skill tree (page, styles, script). `grind/progress.json` is the only file that changes: topics plus one entry per session (date, type, topic, confidence, result). Only public-safe data goes in it.
 - `index.html`: all other content

@@ -3,15 +3,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Sharpener | Rui aka Eyther</title>
+	<title>The Grind | Rui aka Eyther</title>
 	<meta name="description" content="A public scoreboard of how I keep my engineering brain sharp while using AI every day.">
 	<meta name="theme-color" content="#0d1117">
-	<meta property="og:title" content="Sharpener | Rui aka Eyther">
+	<meta property="og:title" content="The Grind | Rui aka Eyther">
 	<meta property="og:description" content="A public scoreboard of how I keep my engineering brain sharp while using AI every day.">
 	<meta property="og:type" content="website">
-	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%AA%92%3C/text%3E%3C/svg%3E">
+	<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9B%8F%EF%B8%8F%3C/text%3E%3C/svg%3E">
 	<link rel="stylesheet" href="../assets/css/style.css">
-	<link rel="stylesheet" href="sharpener.css">
+	<link rel="stylesheet" href="grind.css">
 	<script>
 		// Set theme before first paint to avoid a flash.
 		try {
@@ -36,17 +36,17 @@
 	</div>
 </header>
 
-<main id="sharpener-page" data-src="progress.json">
+<main id="grind-page" data-src="progress.json">
 
 	<!-- Hero -->
 	<section class="hero">
 		<div class="wrap">
-			<p class="eyebrow">Sharpener 🪒</p>
-			<h1>Keeping my engineering brain <em>sharp</em>.</h1>
-			<p class="lead">I use AI every day. This is the public scoreboard of how I make sure I still think for myself.</p>
-			<div class="sh-top">
-				<div class="card"><div id="sh-level"><p class="sh-note">Loading…</p></div></div>
-				<div class="card"><div id="sh-week"></div></div>
+			<p class="eyebrow">The Grind ⛏️</p>
+			<h1>The <em>Grind</em>.</h1>
+			<p class="lead">I use AI every day. This is my public skill tree, levelled the old-school way, 1 to 99, so I make sure I still think for myself.</p>
+			<div class="gr-top">
+				<div class="card"><div id="gr-level"><p class="gr-note">Loading…</p></div></div>
+				<div class="card"><div id="gr-week"></div></div>
 			</div>
 		</div>
 	</section>
@@ -57,11 +57,11 @@
 			<div class="section-head">
 				<p class="eyebrow">01 / Skills</p>
 				<h2>The skill tree.</h2>
-				<p>Seven areas I'm deliberately training. Levels go up with good reviews, and a skill I leave alone for two weeks gets flagged as rusty.</p>
+				<p>Seven skills, each from level 1 to 99. Good reviews give XP, and a skill I leave alone for two weeks gets flagged as rusty.</p>
 			</div>
-			<div class="sh-two">
-				<div id="sh-radar"></div>
-				<div id="sh-skills"></div>
+			<div class="gr-two">
+				<div id="gr-radar"></div>
+				<div id="gr-skills"></div>
 			</div>
 		</div>
 	</section>
@@ -74,19 +74,19 @@
 				<h2>Showing up, and knowing what I know.</h2>
 				<p>Consistency matters less than honesty, so there's a second chart that checks whether my confidence matches reality.</p>
 			</div>
-			<div class="sh-cols">
+			<div class="gr-cols">
 				<div class="card">
-					<p class="sh-label" style="margin-top:0">Last 12 weeks</p>
-					<div id="sh-heat"></div>
-					<div class="sh-legend" aria-hidden="true">
+					<p class="gr-label" style="margin-top:0">Last 12 weeks</p>
+					<div id="gr-heat"></div>
+					<div class="gr-legend" aria-hidden="true">
 						<span>none</span>
-						<i class="sh-cell l0"></i><i class="sh-cell l1"></i><i class="sh-cell l2"></i><i class="sh-cell l3"></i>
+						<i class="gr-cell l0"></i><i class="gr-cell l1"></i><i class="gr-cell l2"></i><i class="gr-cell l3"></i>
 						<span>3+ sessions</span>
 					</div>
 				</div>
 				<div class="card">
-					<p class="sh-label" style="margin-top:0">Calibration</p>
-					<div id="sh-cal"></div>
+					<p class="gr-label" style="margin-top:0">Calibration</p>
+					<div id="gr-cal"></div>
 				</div>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 				<h2>Recent sessions.</h2>
 				<p>The last twelve. Green means I got it right, gold means partly, red means I missed it and learned something.</p>
 			</div>
-			<div id="sh-log"></div>
+			<div id="gr-log"></div>
 		</div>
 	</section>
 
@@ -111,14 +111,14 @@
 				<p class="eyebrow">04 / The rules</p>
 				<h2>How it works.</h2>
 			</div>
-			<ol class="sh-steps">
+			<ol class="gr-steps">
 				<li><b>A scenario every weekday.</b> A small engineering decision: sync, retries, architecture trade-offs, KMP boundaries, or how Kotlin and Compose work inside.</li>
 				<li><b>I answer from my head.</b> Two or three lines, no AI, no lookups. Before I see anything I rate how sure I am, from 1 to 5.</li>
 				<li><b>An AI reviews my reasoning,</b> not just my conclusion, and the result is logged here as right, partly or missed.</li>
 				<li><b>Wednesdays are no-AI days.</b> Tickets by hand, then a lab where I predict, build, verify and break something from the inside. Every second week there's a design kata on paper.</li>
-				<li><b>XP:</b> a decision is worth 10, a lab or kata 30. Right earns full XP, partly 60%, missed 30%, because a miss I understand afterwards still teaches me something.</li>
+				<li><b>XP and levels:</b> a decision is worth 10 XP, a lab or kata 30. Right earns full XP, partly 60%, missed 30%, because a miss I understand afterwards still teaches me something. Levels follow the RuneScape curve, so early ones fly by and level 99 in a skill takes 2,401 XP. Add all seven skills up for a total level, which unlocks titles.</li>
 			</ol>
-			<p class="sh-note">Only dates, topics, confidence ratings and results appear here. Nothing from work, ever.</p>
+			<p class="gr-note">Only dates, topics, confidence ratings and results appear here. Nothing from work, ever.</p>
 			<p class="cv-line"><a class="btn" href="../">← Back to eyther.dev</a></p>
 		</div>
 	</section>
@@ -134,6 +134,6 @@
 
 <script src="../assets/js/now.js"></script>
 <script src="../assets/js/main.js"></script>
-<script src="sharpener.js"></script>
+<script src="grind.js"></script>
 </body>
 </html>

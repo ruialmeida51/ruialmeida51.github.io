@@ -1,6 +1,6 @@
 /*
- * Sharpener: reads progress.json and renders the scoreboard.
- * Used by /sharpener/ (full page, #sharpener-page) and by the homepage card (#sharpener-card).
+ * The Grind: reads progress.json and renders the scoreboard, RuneScape style (levels 1-99).
+ * Used by /grind/ (full page, #grind-page) and by the homepage card (#grind-card).
  * No build step, no dependencies. Data is only ever written with textContent.
  *
  * progress.json:
@@ -16,18 +16,31 @@
 	var BASE = { decision: 10, lab: 30, kata: 30 };
 	var FACTOR = { right: 1, partly: 0.6, missed: 0.3 };
 	var ACCURACY = { right: 1, partly: 0.5, missed: 0 };
-	var LEVELS = [
+	// Total level (sum of the skill levels) unlocks a title.
+	var TITLES = [
 		{ min: 0, title: "Recruit" },
-		{ min: 60, title: "Squire" },
-		{ min: 180, title: "Knight" },
-		{ min: 400, title: "Champion" },
-		{ min: 800, title: "Paladin" }
+		{ min: 21, title: "Squire" },
+		{ min: 70, title: "Knight" },
+		{ min: 140, title: "Champion" },
+		{ min: 250, title: "Paladin" }
 	];
+	var MAX_LEVEL = 99;
+	var CAPS = [10, 25, 50, 75, 99]; // radar scale steps
+	var SEEN_KEY = "grind-levels";
 	var TYPE_LABEL = { decision: "Decision", lab: "Lab", kata: "Kata" };
 	var RESULT_LABEL = { right: "Right", partly: "Partly", missed: "Missed" };
 	var DOW = ["M", "T", "W", "T", "F", "S", "S"];
-	var SKILL_XP_PER_LEVEL = 20; // a skill reaches level 5 at 100 XP
 	var RUSTY_AFTER_DAYS = 14;
+
+	// XP needed for level L is (L-1)^2 / 4, so early levels fly by and 99 takes 2401 XP.
+	function xpFor(l) { return ((l - 1) * (l - 1)) / 4; }
+	function levelOf(xp) { return Math.min(MAX_LEVEL, Math.floor(1 + 2 * Math.sqrt(Math.max(0, xp)))); }
+	function progressIn(xp) {
+		var l = levelOf(xp);
+		if (l >= MAX_LEVEL) return { level: l, pct: 100, toNext: 0 };
+		var lo = xpFor(l), hi = xpFor(l + 1);
+		return { level: l, pct: ((xp - lo) / (hi - lo)) * 100, toNext: hi - xp };
+	}
 
 	function mk(tag, cls, text) {
 		var e = document.createElement(tag);
@@ -85,16 +98,6 @@
 			perDay[key] = (perDay[key] || 0) + 1;
 		});
 
-		var li = 0;
-		for (var i = 0; i < LEVELS.length; i++) if (totalXp >= LEVELS[i].min) li = i;
-		var next = LEVELS[li + 1] || null;
-		var level = {
-			title: LEVELS[li].title,
-			next: next ? next.title : null,
-			toNext: next ? next.min - totalXp : 0,
-			pct: next ? Math.min(100, ((totalXp - LEVELS[li].min) / (next.min - LEVELS[li].min)) * 100) : 100
-		};
-
 		var monday = mondayOf(today);
 		var week = [];
 		for (var d = 0; d < 7; d++) {
@@ -113,15 +116,32 @@
 
 		var skills = topics.map(function (t) {
 			var s = byId[t.id];
+			var p = progressIn(s.xp);
 			return {
 				id: t.id,
 				name: t.name,
 				short: t.short || t.name,
-				level: Math.min(5, s.xp / SKILL_XP_PER_LEVEL),
+				xp: s.xp,
+				level: p.level,
+				pct: p.pct,
 				count: s.count,
 				ago: isNaN(s.last) ? null : Math.round((today - s.last) / DAY)
 			};
 		});
+
+		var totalLevel = skills.reduce(function (a, s) { return a + s.level; }, 0);
+		var maxTotal = skills.length * MAX_LEVEL;
+		var ti = 0;
+		for (var i = 0; i < TITLES.length; i++) if (totalLevel >= TITLES[i].min) ti = i;
+		var nextT = TITLES[ti + 1] || null;
+		var level = {
+			title: TITLES[ti].title,
+			total: totalLevel,
+			max: maxTotal,
+			next: nextT ? nextT.title : null,
+			toNext: nextT ? nextT.min - totalLevel : 0,
+			pct: nextT ? Math.min(100, ((totalLevel - TITLES[ti].min) / (nextT.min - TITLES[ti].min)) * 100) : 100
+		};
 
 		return { sessions: sessions, totalXp: totalXp, level: level, week: week, weekHits: weekHits,
 			cal: cal, skills: skills, perDay: perDay, today: today, monday: monday };
@@ -131,31 +151,32 @@
 
 	function levelBlock(st) {
 		var frag = document.createDocumentFragment();
-		var head = mk("div", "sh-level");
+		var head = mk("div", "gr-level");
 		head.appendChild(mk("b", null, st.level.title));
-		head.appendChild(mk("span", null, Math.round(st.totalXp) + " XP · " + plural(st.sessions.length, "session", "sessions")));
+		head.appendChild(mk("span", null, "Total level " + st.level.total + " / " + st.level.max + " · " +
+			Math.round(st.totalXp) + " XP · " + plural(st.sessions.length, "session", "sessions")));
 		frag.appendChild(head);
 
-		var bar = mk("div", "sh-bar");
+		var bar = mk("div", "gr-bar");
 		bar.setAttribute("role", "img");
-		bar.setAttribute("aria-label", st.level.next ? "Progress towards " + st.level.next : "Top level reached");
+		bar.setAttribute("aria-label", st.level.next ? "Progress towards " + st.level.next : "Top title reached");
 		var fill = document.createElement("i");
 		bar.appendChild(fill);
 		frag.appendChild(bar);
 		requestAnimationFrame(function () { fill.style.width = st.level.pct + "%"; });
 
-		frag.appendChild(mk("p", "sh-note mono", st.level.next
-			? Math.ceil(st.level.toNext) + " XP to " + st.level.next
-			: "Top level reached."));
+		frag.appendChild(mk("p", "gr-note mono", st.level.next
+			? st.level.toNext + " more total " + (st.level.toNext === 1 ? "level" : "levels") + " to " + st.level.next
+			: "Top title reached."));
 		return frag;
 	}
 
 	function weekRow(st) {
-		var row = mk("div", "sh-week");
+		var row = mk("div", "gr-week");
 		row.setAttribute("role", "img");
 		row.setAttribute("aria-label", "This week: " + st.weekHits + " of 5 weekdays practised");
 		st.week.slice(0, 5).forEach(function (d, i) {
-			row.appendChild(mk("span", "sh-day" + (d.n ? " hit" : "") + (d.today ? " today" : ""), DOW[i]));
+			row.appendChild(mk("span", "gr-day" + (d.n ? " hit" : "") + (d.today ? " today" : ""), DOW[i]));
 		});
 		return row;
 	}
@@ -171,9 +192,9 @@
 	function renderCard(root, st) {
 		clear(root);
 		root.appendChild(levelBlock(st));
-		root.appendChild(mk("p", "sh-label", "This week · " + st.weekHits + " of 5"));
+		root.appendChild(mk("p", "gr-label", "This week · " + st.weekHits + " of 5"));
 		root.appendChild(weekRow(st));
-		root.appendChild(mk("p", "sh-note mono", calLine(st)));
+		root.appendChild(mk("p", "gr-note mono", calLine(st)));
 	}
 
 	// ---- full page ---------------------------------------------------------
@@ -185,9 +206,11 @@
 	}
 
 	function radar(skills) {
+		var top = Math.max.apply(null, skills.map(function (s) { return s.level; }));
+		var cap = CAPS.filter(function (c) { return c >= top; })[0] || MAX_LEVEL;
 		var W = 440, H = 320, CX = W / 2, CY = H / 2, R = 100, n = skills.length;
-		var root = svg("svg", { viewBox: "0 0 " + W + " " + H, "class": "sh-radar", role: "img",
-			"aria-label": "Skill radar: " + skills.map(function (s) { return s.short + " " + s.level.toFixed(1) + " of 5"; }).join(", ") });
+		var root = svg("svg", { viewBox: "0 0 " + W + " " + H, "class": "gr-radar", role: "img",
+			"aria-label": "Skill radar: " + skills.map(function (s) { return s.short + " " + "level " + s.level; }).join(", ") + " (scale to " + cap + ")" });
 		function pt(i, r) {
 			var a = -Math.PI / 2 + (i * 2 * Math.PI) / n;
 			return [CX + Math.cos(a) * r, CY + Math.sin(a) * r];
@@ -202,9 +225,9 @@
 			var p = pt(i, R);
 			root.appendChild(svg("line", { "class": "axis", x1: CX, y1: CY, x2: p[0].toFixed(1), y2: p[1].toFixed(1) }));
 		});
-		root.appendChild(svg("polygon", { "class": "shape", points: pts(function (s) { return (R * s.level) / 5; }) }));
+		root.appendChild(svg("polygon", { "class": "shape", points: pts(function (s) { return (R * s.level) / cap; }) }));
 		skills.forEach(function (s, i) {
-			var d = pt(i, (R * s.level) / 5);
+			var d = pt(i, (R * s.level) / cap);
 			root.appendChild(svg("circle", { "class": "dot", cx: d[0].toFixed(1), cy: d[1].toFixed(1), r: 3.5 }));
 			var l = pt(i, R + 14);
 			var anchor = l[0] < CX - 8 ? "end" : l[0] > CX + 8 ? "start" : "middle";
@@ -212,20 +235,23 @@
 			t.textContent = s.short;
 			root.appendChild(t);
 		});
+		var scale = svg("text", { x: CX + 4, y: CY - R - 3, "class": "scale" });
+		scale.textContent = String(cap);
+		root.appendChild(scale);
 		return root;
 	}
 
 	function skillList(skills) {
-		var ul = mk("ul", "sh-skills");
+		var ul = mk("ul", "gr-skills");
 		skills.forEach(function (s) {
-			var li = mk("li", "sh-skill");
+			var li = mk("li", "gr-skill");
 			li.appendChild(mk("span", "name", s.name));
-			li.appendChild(mk("span", "lv", "Lv " + s.level.toFixed(1)));
-			var bar = mk("div", "sh-bar");
+			li.appendChild(mk("span", "lv", "Level " + s.level));
+			var bar = mk("div", "gr-bar");
 			var fill = document.createElement("i");
 			bar.appendChild(fill);
 			li.appendChild(bar);
-			requestAnimationFrame(function () { fill.style.width = (s.level / 5) * 100 + "%"; });
+			requestAnimationFrame(function () { fill.style.width = s.pct + "%"; });
 			var rusty = s.ago != null && s.ago > RUSTY_AFTER_DAYS;
 			var meta = mk("span", "meta", s.ago == null
 				? "Not practised yet"
@@ -242,19 +268,19 @@
 
 	function heat(st) {
 		var activeDays = Object.keys(st.perDay).length;
-		var wrap = mk("div", "sh-heat");
+		var wrap = mk("div", "gr-heat");
 		wrap.setAttribute("role", "img");
 		wrap.setAttribute("aria-label", "Activity over the last 12 weeks: " + plural(activeDays, "active day", "active days"));
-		var labels = mk("div", "sh-heat-days");
+		var labels = mk("div", "gr-heat-days");
 		DOW.forEach(function (d) { labels.appendChild(mk("span", null, d)); });
 		wrap.appendChild(labels);
 		for (var w = 11; w >= 0; w--) {
-			var col = mk("div", "sh-heat-col");
+			var col = mk("div", "gr-heat-col");
 			var mon = st.monday - w * 7 * DAY;
 			for (var d = 0; d < 7; d++) {
 				var ms = mon + d * DAY;
 				var n = st.perDay[iso(ms)] || 0;
-				var cell = mk("i", "sh-cell l" + Math.min(n, 3) + (ms > st.today ? " future" : ""));
+				var cell = mk("i", "gr-cell l" + Math.min(n, 3) + (ms > st.today ? " future" : ""));
 				cell.title = fmtShort(ms) + ": " + plural(n, "session", "sessions");
 				col.appendChild(cell);
 			}
@@ -264,9 +290,9 @@
 	}
 
 	function calRow(label, value) {
-		var row = mk("div", "sh-cal-row");
+		var row = mk("div", "gr-cal-row");
 		row.appendChild(mk("span", null, label));
-		var bar = mk("div", "sh-bar");
+		var bar = mk("div", "gr-bar");
 		var fill = document.createElement("i");
 		bar.appendChild(fill);
 		row.appendChild(bar);
@@ -278,27 +304,27 @@
 	function calibration(root, st) {
 		clear(root);
 		if (st.cal.n < 5) {
-			root.appendChild(mk("p", "sh-empty", "Unlocks after 5 sessions with a confidence rating (" + st.cal.n + " so far)."));
+			root.appendChild(mk("p", "gr-empty", "Unlocks after 5 sessions with a confidence rating (" + st.cal.n + " so far)."));
 		} else {
-			root.appendChild(mk("p", "sh-verdict", st.cal.verdict));
+			root.appendChild(mk("p", "gr-verdict", st.cal.verdict));
 			root.appendChild(calRow("How sure I said I was", st.cal.conf));
 			root.appendChild(calRow("How often I was right", st.cal.acc));
 		}
-		root.appendChild(mk("p", "sh-note", "Before I see any answer I rate my confidence from 1 to 5. If those two bars match over time, my gut can be trusted. If not, that's worth knowing."));
+		root.appendChild(mk("p", "gr-note", "Before I see any answer I rate my confidence from 1 to 5. If those two bars match over time, my gut can be trusted. If not, that's worth knowing."));
 	}
 
 	function sessionLog(root, st) {
 		clear(root);
 		if (!st.sessions.length) {
-			root.appendChild(mk("p", "sh-empty", "Nothing logged yet. The first session is always the hardest, check back soon."));
+			root.appendChild(mk("p", "gr-empty", "Nothing logged yet. The first session is always the hardest, check back soon."));
 			return;
 		}
 		var names = {};
 		st.skills.forEach(function (s) { names[s.id] = s.name; });
-		var ul = mk("ul", "sh-log");
+		var ul = mk("ul", "gr-log");
 		st.sessions.slice().reverse().slice(0, 12).forEach(function (s) {
 			var r = s.raw;
-			var li = mk("li", "sh-entry r-" + r.result);
+			var li = mk("li", "gr-entry r-" + r.result);
 			li.appendChild(mk("span", "d", fmtShort(s.day)));
 			li.appendChild(mk("span", "t", TYPE_LABEL[r.type]));
 			li.appendChild(mk("span", "topic", names[r.topic] || r.topic || ""));
@@ -321,25 +347,43 @@
 	function renderPage(st) {
 		var $ = function (id) { return document.getElementById(id); };
 		var el;
-		if ((el = $("sh-level"))) { clear(el); el.appendChild(levelBlock(st)); }
-		if ((el = $("sh-week"))) {
+		if ((el = $("gr-level"))) { clear(el); el.appendChild(levelBlock(st)); }
+		if ((el = $("gr-week"))) {
 			clear(el);
-			el.appendChild(mk("p", "sh-label", "This week · " + st.weekHits + " of 5"));
+			el.appendChild(mk("p", "gr-label", "This week · " + st.weekHits + " of 5"));
 			el.appendChild(weekRow(st));
-			el.appendChild(mk("p", "sh-note", "Weekdays I showed up. Misses don't reset anything, the aim is 4 of 5."));
+			el.appendChild(mk("p", "gr-note", "Weekdays I showed up. Misses don't reset anything, the aim is 4 of 5."));
 		}
-		if ((el = $("sh-radar")) && st.skills.length >= 3) { clear(el); el.appendChild(radar(st.skills)); }
-		if ((el = $("sh-skills"))) { clear(el); el.appendChild(skillList(st.skills)); }
-		if ((el = $("sh-heat"))) { clear(el); el.appendChild(heat(st)); }
-		if ((el = $("sh-cal"))) calibration(el, st);
-		if ((el = $("sh-log"))) sessionLog(el, st);
+		if ((el = $("gr-radar")) && st.skills.length >= 3) { clear(el); el.appendChild(radar(st.skills)); }
+		if ((el = $("gr-skills"))) { clear(el); el.appendChild(skillList(st.skills)); }
+		if ((el = $("gr-heat"))) { clear(el); el.appendChild(heat(st)); }
+		if ((el = $("gr-cal"))) calibration(el, st);
+		if ((el = $("gr-log"))) sessionLog(el, st);
+	}
+
+	// ---- level-up toast (page only, remembers what this browser has already seen) ----
+
+	function levelUps(st) {
+		var seen = null, now = {};
+		st.skills.forEach(function (s) { now[s.id] = s.level; });
+		try { seen = JSON.parse(localStorage.getItem(SEEN_KEY)); } catch (e) {}
+		try { localStorage.setItem(SEEN_KEY, JSON.stringify(now)); } catch (e) {}
+		if (!seen || typeof seen !== "object") return; // first visit: don't shout
+		var ups = st.skills.filter(function (s) { return seen[s.id] != null && s.level > seen[s.id]; });
+		if (!ups.length) return;
+		var t = document.getElementById("toast");
+		if (!t) return;
+		var best = ups.sort(function (a, b) { return (b.level - seen[b.id]) - (a.level - seen[a.id]); })[0];
+		t.textContent = "Congratulations, you just advanced a " + best.name + " level! You are now level " + best.level + ".";
+		t.classList.add("show");
+		setTimeout(function () { t.classList.remove("show"); }, 6000);
 	}
 
 	// ---- boot --------------------------------------------------------------
 
 	function init() {
-		var card = document.getElementById("sharpener-card");
-		var page = document.getElementById("sharpener-page");
+		var card = document.getElementById("grind-card");
+		var page = document.getElementById("grind-page");
 		var host = card || page;
 		if (!host || !window.fetch) return;
 		fetch(host.getAttribute("data-src") || "progress.json", { cache: "no-cache" })
@@ -347,14 +391,14 @@
 			.then(function (data) {
 				var st = compute(data);
 				if (card) renderCard(card, st);
-				if (page) renderPage(st);
+				if (page) { renderPage(st); levelUps(st); }
 			})
 			.catch(function () {
 				var msg = "Couldn't load the scoreboard right now.";
-				if (card) { clear(card); card.appendChild(mk("p", "sh-note", msg)); }
+				if (card) { clear(card); card.appendChild(mk("p", "gr-note", msg)); }
 				if (page) {
-					var l = document.getElementById("sh-log");
-					if (l) { clear(l); l.appendChild(mk("p", "sh-empty", msg)); }
+					var l = document.getElementById("gr-log");
+					if (l) { clear(l); l.appendChild(mk("p", "gr-empty", msg)); }
 				}
 			});
 	}
