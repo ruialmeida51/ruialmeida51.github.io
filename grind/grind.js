@@ -390,41 +390,48 @@
 	function loadQuestion() {
 		var host = document.getElementById("gr-question");
 		if (!host || !window.fetch) return;
-		fetch(HANS_URL + "/rest/v1/questions?select=date,kind,topic,title,body&order=date.desc,id.desc&limit=1",
+		// Latest day's questions: a Wednesday has a lab and, on kata weeks, a kata too.
+		fetch(HANS_URL + "/rest/v1/questions?select=id,date,kind,topic,title,body&order=date.desc,id.asc&limit=6",
 			{ headers: { apikey: HANS_KEY } })
 			.then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
-			.then(function (rows) {
+			.then(function (all) {
 				clear(host);
-				if (!rows.length) {
+				if (!all.length) {
 					host.appendChild(mk("p", "gr-empty", "Hans: Hello. What are you doing here? No quest today. Check back after the morning session."));
 					return;
 				}
-				var q = rows[0];
-				var card = mk("article", "card gr-q");
-				card.appendChild(mk("p", "gr-q-kind", q.kind.toUpperCase() + " · " + q.topic));
-				card.appendChild(mk("h3", null, q.title));
-				card.appendChild(mk("div", "gr-q-text", q.body));
+				var rows = all.filter(function (q) { return q.date === all[0].date; });
 
 				// Cosmetic only: the real gate is the login plus row-level security in the database.
 				var owner = false;
 				try { owner = !!localStorage.getItem("sb-fotbvouyrrwuoyinrryw-auth-token"); } catch (e) {}
-				var req = mk("div", "gr-q-req");
-				req.appendChild(mk("p", "gr-q-reqtitle", "Quest requirements"));
-				var list = mk("ul", "gr-q-reqlist");
-				list.appendChild(mk("li", owner ? "met" : "unmet",
-					(owner ? "✔ " : "✘ ") + "Complete the quest “Owner of eyther.dev”"));
-				list.appendChild(mk("li", owner ? "met" : "unmet",
-					(owner ? "✔ " : "✘ ") + "Skill: Being Rui, level 1 (" + (owner ? "1" : "0") + "/1)"));
-				req.appendChild(list);
-				req.appendChild(mk("p", "gr-note", owner
-					? "Requirements met. Go on then."
-					: "You do not meet the requirements to start this quest. You may still answer it in your head, but no XP will be awarded."));
-				card.appendChild(req);
 
-				var a = mk("a", "btn primary", owner ? "Click here to answer" : "Click here to answer (if you dare)");
-				a.href = "answer/";
-				card.appendChild(a);
-				host.appendChild(card);
+				rows.forEach(function (q, i) {
+					var card = mk("article", "card gr-q");
+					card.appendChild(mk("p", "gr-q-kind", q.kind.toUpperCase() + " \u00b7 " + q.topic));
+					card.appendChild(mk("h3", null, q.title));
+					card.appendChild(mk("div", "gr-q-text", q.body));
+
+					if (i === rows.length - 1) {
+						var req = mk("div", "gr-q-req");
+						req.appendChild(mk("p", "gr-q-reqtitle", "Quest requirements"));
+						var list = mk("ul", "gr-q-reqlist");
+						list.appendChild(mk("li", owner ? "met" : "unmet",
+							(owner ? "\u2714 " : "\u2718 ") + "Complete the quest \u201cOwner of eyther.dev\u201d"));
+						list.appendChild(mk("li", owner ? "met" : "unmet",
+							(owner ? "\u2714 " : "\u2718 ") + "Skill: Being Rui, level 1 (" + (owner ? "1" : "0") + "/1)"));
+						req.appendChild(list);
+						req.appendChild(mk("p", "gr-note", owner
+							? "Requirements met. Go on then."
+							: "You do not meet the requirements to start this quest. You may still answer it in your head, but no XP will be awarded."));
+						card.appendChild(req);
+					}
+
+					var a = mk("a", "btn primary", owner ? "Click here to answer" : "Click here to answer (if you dare)");
+					a.href = "answer/#q-" + q.id;
+					card.appendChild(a);
+					host.appendChild(card);
+				});
 			})
 			.catch(function () {
 				clear(host);

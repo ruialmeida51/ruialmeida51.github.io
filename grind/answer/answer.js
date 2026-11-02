@@ -116,6 +116,7 @@
 
 	function questionCard(q, a, signedIn, onDone) {
 		var card = mk("article", "card an-card");
+		card.id = "q-" + q.id;
 		var head = mk("div", "an-head");
 		head.appendChild(mk("span", "an-kind", q.kind.toUpperCase() + " · " + q.topic));
 		head.appendChild(mk("span", "gr-note", dateLabel(q.date)));
@@ -144,6 +145,8 @@
 		}
 		return card;
 	}
+
+	var wantHash = (location.hash || "").replace("#", "");
 
 	function renderDesk(signedIn) {
 		var qReq = sb.from("questions").select("id,date,kind,topic,title,body")
@@ -185,6 +188,11 @@
 			as.forEach(function (a) { byQ[a.question_id] = a; });
 			qs.forEach(function (q) { wrap.appendChild(questionCard(q, byQ[q.id], signedIn, function () { renderDesk(true); })); });
 			show(wrap);
+			if (wantHash) {
+				var target = document.getElementById(wantHash);
+				wantHash = "";
+				if (target) target.scrollIntoView({ block: "start" });
+			}
 		});
 	}
 
