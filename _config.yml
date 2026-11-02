@@ -1,0 +1,15 @@
+title: Rui aka Eyther
+description: Notes from a senior Android and Kotlin Multiplatform engineer. Every word written by hand.
+url: https://eyther.dev
+lang: en
+markdown: kramdown
+permalink: /blog/:year/:month/:title/
+plugins:
+  - jekyll-feed
+feed:
+  path: blog/feed.xml
+exclude:
+  - README.md
+  - WRITING.md
+  - .gitignore
+  - CNAME

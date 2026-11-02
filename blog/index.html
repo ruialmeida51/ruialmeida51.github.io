@@ -1,0 +1,32 @@
+---
+layout: blog
+title: Blog
+---
+<section class="hero">
+	<div class="wrap">
+		<p class="eyebrow">Blog ✍️</p>
+		<h1>Notes, <em>by hand</em>.</h1>
+		<p class="lead">Things I learn about Android, Kotlin Multiplatform and engineering. No AI writes any of it, I only let one check my grammar.</p>
+	</div>
+</section>
+
+<section class="alt">
+	<div class="wrap">
+		{% if site.posts.size > 0 %}
+		<ul class="post-list">
+			{% for post in site.posts %}
+			<li>
+				<a class="post-card" href="{{ post.url }}">
+					<span class="d mono"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %b %Y" }}</time></span>
+					<span class="t">{{ post.title | escape }}</span>
+					{% if post.summary %}<span class="s">{{ post.summary | escape }}</span>{% endif %}
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+		{% else %}
+		<p class="empty">Nothing here yet. The first post is being written, slowly, by hand.</p>
+		{% endif %}
+		<p class="note"><a href="/blog/feed.xml">RSS feed</a></p>
+	</div>
+</section>

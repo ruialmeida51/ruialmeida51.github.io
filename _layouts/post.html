@@ -1,0 +1,18 @@
+---
+layout: blog
+---
+<article class="post">
+	<div class="wrap">
+		<p class="eyebrow"><a href="/blog/">Blog</a></p>
+		<h1>{{ page.title | escape }}</h1>
+		<p class="post-meta mono">
+			<time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d %B %Y" }}</time>
+			· {% assign words = content | number_of_words %}{% assign mins = words | divided_by: 220 | plus: 1 %}{{ mins }} min read
+		</p>
+		<p class="by-hand">✍️ Hand-written. Every word is mine.{% if page.grammar_checked %} An AI checked the grammar, nothing else.{% endif %}</p>
+		<div class="post-body">
+			{{ content }}
+		</div>
+		<p class="cv-line"><a class="btn" href="/blog/">← All posts</a></p>
+	</div>
+</article>

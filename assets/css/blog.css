@@ -1,0 +1,30 @@
+/* Blog pages. Uses the site's tokens from style.css. */
+.post { padding: 56px 0 72px; }
+.post .wrap { max-width: 740px; }
+.post .eyebrow a { color: inherit; text-decoration: none; }
+.post h1 { margin: 6px 0 10px; }
+.post-meta { color: var(--muted); font-size: .85rem; margin: 0 0 6px; }
+.by-hand { display: inline-block; font: 600 .8rem var(--mono); color: var(--accent); border: 1px solid var(--line); background: var(--bg-alt); border-radius: 99px; padding: 4px 12px; margin: 6px 0 28px; }
+.post-body { font-size: 1.06rem; line-height: 1.75; }
+.post-body h2 { margin: 2em 0 .5em; }
+.post-body h3 { margin: 1.6em 0 .4em; }
+.post-body a { color: var(--accent); }
+.post-body blockquote { margin: 1.4em 0; padding: .2em 1.1em; border-left: 3px solid var(--accent); color: var(--muted); }
+.post-body img { max-width: 100%; height: auto; border-radius: 10px; }
+.post-body code { font-family: var(--mono); font-size: .9em; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 5px; padding: .1em .35em; }
+.post-body pre { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; line-height: 1.5; }
+.post-body pre code { background: none; border: 0; padding: 0; font-size: .86rem; }
+.post-body table { border-collapse: collapse; display: block; overflow-x: auto; }
+.post-body th, .post-body td { border: 1px solid var(--line); padding: 6px 12px; }
+.post .cv-line { margin-top: 48px; }
+
+.post-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.post-card { display: grid; grid-template-columns: 110px 1fr; gap: 4px 16px; padding: 16px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
+.post-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.post-card .d { color: var(--muted); font-size: .8rem; padding-top: .25em; }
+.post-card .t { font-weight: 600; font-size: 1.05rem; }
+.post-card .s { grid-column: 2; color: var(--muted); font-size: .92rem; }
+@media (max-width: 560px) { .post-card { grid-template-columns: 1fr; } .post-card .s { grid-column: 1; } }
+@media (prefers-reduced-motion: reduce) { .post-card { transition: none; } .post-card:hover { transform: none; } }
+.empty, .note { color: var(--muted); }
+.note { font-size: .85rem; margin-top: 18px; }
