@@ -381,13 +381,28 @@
 
 	// ---- boot --------------------------------------------------------------
 
+	// Public, read-only. Row-level security only allows SELECT on sessions; writes go through the owner's connector.
+	var HANS_URL = "https://fotbvouyrrwuoyinrryw.supabase.co";
+	var HANS_KEY = "sb_publishable_RXiIRWiyUSG887AJvP5XxQ_y4seOvRe";
+
 	function init() {
 		var card = document.getElementById("grind-card");
 		var page = document.getElementById("grind-page");
 		var host = card || page;
 		if (!host || !window.fetch) return;
-		fetch(host.getAttribute("data-src") || "progress.json", { cache: "no-cache" })
+		var cfg = fetch(host.getAttribute("data-src") || "progress.json", { cache: "no-cache" })
+			.then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); });
+		// Sessions live in Supabase (public, read-only key). If it is down, fall back to progress.json.
+		var live = fetch(HANS_URL + "/rest/v1/sessions?select=date,type,topic,confidence,result,note&order=date.asc,id.asc",
+			{ headers: { apikey: HANS_KEY } })
 			.then(function (r) { if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+			.catch(function () { return null; });
+		Promise.all([cfg, live])
+			.then(function (res) {
+				var data = res[0];
+				if (Array.isArray(res[1])) data.sessions = res[1];
+				return data;
+			})
 			.then(function (data) {
 				var st = compute(data);
 				if (card) renderCard(card, st);
